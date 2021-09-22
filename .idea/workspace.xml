@@ -85,10 +85,17 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Brute">
     <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+    </configuration>
+    <configuration name="Brute" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Brute" />
+      <module name="S2" />
+      <option name="PROGRAM_PARAMETERS" value="4 5" />
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <method v="2" />
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -101,11 +108,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Point" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Point" />
+      <module name="S2" />
+      <option name="PROGRAM_PARAMETERS" value="2 3 31 141 1 1 1" />
+      <method v="2" />
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+      <method v="2" />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
@@ -114,8 +125,14 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Point" />
+      <item itemvalue="Application.Brute" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Brute" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>

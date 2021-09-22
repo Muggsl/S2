@@ -1,9 +1,12 @@
+package AnonymousClass;
+
 import edu.princeton.cs.algs4.*;
 
+import java.util.Arrays;
 import java.util.Comparator;
 
 /*************************************************************************
- * Compilation: javac Point.java Execution: Dependencies: StdDraw.java
+ * Compilation: javac Original.Point.java Execution: Dependencies: StdDraw.java
  *
  * Description: An immutable data type for points in the plane.
  *
@@ -13,26 +16,51 @@ public class Point implements Comparable<Point> {
 
     public final int x, y;
 
-    // compare points by slope
-    public Comparator<Point> SLOPE_ORDER;
+    /**
+     * This comparator compares points according to their distance to another point.
+     *
+     * For example, let:
+     * Point A = new Point(5,5);
+     * Point B = new Point(1,1);
+     * Point C = new Point(7,8);
+     * Point D = new Point(4,5);
+     * Point[] points = {B,C,D};
+     *
+     * Then sorting the array 'points' according to the comparator A.DISTANCE_ORDER:
+     * Arrays.sort(points,A.DISTANCE_ORDER);
+     *
+     * The resulting order in 'points' is: D, C, B
+     *
+     * Here, we use what is called an 'anonymous class': we don't create a proper class for
+     * the comparator, we just say we create a 'Comparator<Point>' object and give the code
+     * for its function 'compare()'
+     *
+     * The comparator has access to the inner variables x and y of the point it is constructed from.
+     */
+    public final Comparator<Point> DISTANCE_ORDER = new Comparator<Point>(){
+        public int compare(Point pointA, Point pointB) {
+            // x and y would have to be replaced by Point.this.x and Point.this.y if we defined variables called x and y in here.
+            int dxA = pointA.x - x, dyA = pointA.y - y;
+            int dxB = pointB.x - x, dyB = pointB.y - y;
 
-    public class SLOPE_ORDER implements Comparator<Point>
-    {
-        public int compare(Point p1, Point p2)
-        {
-            double firstSlope = slopeTo(p1);
-            double secondSlope = slopeTo(p2);
-            //Compare : returns 0 if the firstSlope is equal to the second
-            //          -1 if its lower, 1 if its higher
-            return Double.compare(firstSlope, secondSlope);
+            double distanceA = Math.sqrt( dxA*dxA + dyA*dyA );
+            double distanceB = Math.sqrt( dxB*dxB + dyB*dyB );
+
+            return Double.compare(distanceA,distanceB);
         }
+    };
+
+    // compare points by slope
+    public final Comparator<Point> SLOPE_ORDER = null;
+
+    private static int searchInArrayByDistanceToPoint(Point[] array, Point target, Point point){
+        return Arrays.binarySearch(array, target, point.DISTANCE_ORDER);
     }
 
     // create the point (x, y)
     public Point(int x, int y) {
         this.x = x;
         this.y = y;
-        SLOPE_ORDER = new SLOPE_ORDER();
     }
 
     // plot this point to standard drawing
@@ -50,55 +78,16 @@ public class Point implements Comparable<Point> {
     // slope between this point and that point
     public double slopeTo(Point that) {
         // TODO: Implement this
-        double slope;
-
-        if(this.x == that.x && this.y == that.y)
-        {
-            slope = Double.NEGATIVE_INFINITY;
-        }
-        if(this.y == that.y)
-        {
-            //The line is straight
-            return 0.0;
-        }
-        if(this.x == that.x)
-        {
-            slope = Double.POSITIVE_INFINITY;
-        }
-
-        else
-        {
-            double y1,y2,x1,x2;
-            y2 = that.y;
-            y1 = this.y;
-            x2 = that.x;
-            x1 = this.x;
-            //formula for finding the slope of a line m = deltaY/deltaX
-            slope = (y2-y1)/(x2-x1);
-        }
-        return slope;
+        return 0;
     }
 
     /**
      * Is this point lexicographically smaller than that one? comparing
      * y-coordinates and breaking ties by x-coordinates
      */
-    public int compareTo(Point that)
-    {
-        if(that == null)
-        {
-            throw new java.lang.NullPointerException();
-        }
-
-        int point;
-        point = this.y - that.y;
-
-        if(point == 0)
-        {
-            point = this.x - that.x;
-        }
-        return Integer.compare(point, 0);
-
+    public int compareTo(Point that) {
+        // TODO: Implement this
+        return 0;
     }
 
     // return string representation of this point
@@ -111,7 +100,7 @@ public class Point implements Comparable<Point> {
         /*
          * Do not modify
          */
-        In in = new In("testinput/mystery10089.txt");
+        In in = new In();
         Out out = new Out();
         int n = in.readInt();
         Point[] points = new Point[n];
